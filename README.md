@@ -75,9 +75,9 @@
 ```latex
 \begin{document}
 \maketitle
-\begin{abstraction}
+\begin{abstract}
 ...              %摘要内容
-\begin{abstraction}
+\begin{abstract}
 
 \noindent\textbf{关键词：} ...     %填写需要的关键词
 ...         %\noindent用于取消首行缩进
@@ -134,12 +134,13 @@
 
 
 ### 空格
-latex会根据上下文自动调整空格大小，并且将连续的空格或换行视为一个空格  
-- **单个空格** 敲一个空格或换行
+latex会根据上下文自动调整空格大小，正常空格不会被编译，但可以强制空格
 - **强制空格** 
-  - `\`：一个单词的词距
+  - `\;`
+  - `\,`
   - `\ `：一个普通的空格
   - `\quad`：一个很大的空格
+  - `\qquad`
 
 ---
 
@@ -240,7 +241,102 @@ y&=(x+1)^2 \\      % \\用于换行
 \end{align}
 ```
 
-*latex提供了丰富的数学符号，详细见另一个笔记*  
+latex提供了丰富的数学符号，下面给出常用的一些类型：  
+
+**基本符号与运算**  
+- 符号  
+
+|Symbol|LaTeX Code|Symbol|LaTeX Code|Symbol|LaTeX Code|Symbol|LaTeX Code|
+|:---|:---|:---|:---|:---|:---|:---|:---|
+|$\alpha$|`\alpha`|$\beta$|`\beta`|$\gamma$|`\gamma`|$\delta$|`\delta`|
+|$\epsilon$|`\epsilon`|$\zeta$|`\zeta`|$\eta$|`\eta`|$\theta$|`\theta`|
+|$\infty$|`\infty`|$e$|`e`|$\lambda$|`\lambda`|$\mu$|`\mu`|
+|$\nu$ |`\nu`|$\xi$|`\xi`|$o$|`o`|$\pi$|`\pi`|
+|$\rho$|`\rho`|$\sigma$|`\sigma`|$\tau$|`\tau`|$\upsilon$|`\upsilon`|
+|$\phi$|`\phi`|$\chi$|`\chi`|$\psi$|`\psi`|$\omega$|`\omega`|  
+ 
+大写即将首字母大写，如$\Omega$,`\Omega`  
+
+|Symbol|Latex code|Symbol|Latex code|Symbol|Latex code|
+|:---|:---|:---|:---|:---|:---|
+|$\neq$|`\neq`|$\leqslant$|`\leqslant`|$\geqslant$|`\geqslant`|
+|$\approx$|`\approx`|$\in$|`\in`|$\notin$|`\notin`|
+|$\ni$|`\ni`|$\subset$|`\subset`|$\subseteq$|`\subseteq`|
+|$\supset$|`\supset`|$\supseteq$|`\supseteq`|$\forall$|`\forall`|
+|$\exists$|`\exists`|$\cap$|`\cap`|$\cup$|`\cup`|
+
+|Symbol|Latex code|Symbol|Latex code|Symbol|Latex code|
+|:---|:---|:---|:---|:---|:---|
+|$\leftarrow$|`\leftarrow`|$\rightarrow$|`\rightarrow`|$\mapsto$|`\mapsto`|
+|$\Leftarrow$|`\Leftarrow`|$\Rightarrow$|`\Rightarrow`|$\longmapsto$|`\longmapsto`|
+|$\longleftarrow$|`\longleftarrow`|$\longrightarrow$|`\longrightarrow`|$\leftrightarrow$|`\leftrightarrow`|
+
+不难发现规律，以此类推有uparrow和downarrow等
+
+|Symbol|Latex code|Symbol|Latex code|Symbol|Latex code|
+|:---|:---|:---|:---|:---|:---|
+|$\|$|`\|`|$\\|$|`\|\|`|$\{$|`\{`|
+|$\lceil$|`\lceil`|$\lfloor$|`\lfloor`|$[$|`[`|
+
+使用`\left`和`\right`可以使分隔符匹配中间公式高度，把小括号变成大括号，如：  
+
+`\left| \frac{A}{B} \right|`&nbsp;&nbsp;&nbsp;&nbsp;$\left| \frac{A}{B} \right|$  
+`\left\{ \frac{A}{B} \right\}`&nbsp;&nbsp;&nbsp;&nbsp;$\left\{ \frac{A}{B} \right\}$   
+
+如果只需要一边，需要使用`\left.`，如：
+
+`\left. \frac{x}{2} \right|_{-\infty}^{\infty}`&nbsp;&nbsp;&nbsp;&nbsp;$\left. \frac{x}{2} \right|_{-\infty}^{\infty}$
+
+- 表达式
+
+|constructs|Latex code|constructs|Latex code|constructs|Latex code|  
+|:---|:---|:---|:---|:---|:---|  
+|$a^x$|`a^x`|$x_i$|`x_i`|$\overrightarrow{a}$|`\overrightarrow{a}`|
+|$\frac{abc}{xyz}$|`\frac{abc}{xyz}`|$\sqrt[n]{abc}$|`\sqrt[n]{abc}`|$\overline{abc}$|`\overline{abc}`|
+|$\sum_{i=1}^{\infty}$|`\sum_{i=1}^{\infty}`|$\prod_{i=1}^{\infty}$|`\prod_{i=1}^{\infty}`|$f'$|`f'`|
+|$\int_{0}^{1}$|`\int_{0}^{1}`|$\iint$|`\iint`|$\oint$|`\oint`|
+$\nabla$|`\nabla`|$\partial$|`\partial`|$\cdot$|`\cdot`|
+|$\times$|`\times`|
+
+如果不想将上下标标在左侧，可以利用`\limits`强制上下标出现在运算符正上下方，如：
+
+`\sum\limits_{i=1}^{\infty}x_i`&nbsp;&nbsp;&nbsp;&nbsp;$\sum\limits_{i=1}^{\infty}x_i$
+
+- 函数
+
+|function|Latex code|function|Latex code|function|Latex code|
+|:---|:---|:---|:---|:---|:---|
+|$\exp$|`\exp`|$lg$|`\lg`|$\ln$|`\ln`|
+|$\lim$|`\lim`|$\sup$|`\sup`|$\inf$|`\inf`|
+|$\min$|`\min`|$\max$|`\max`|$\det$|`\det`|
+|$\gcd$|`\gcd`|
+
+对于 **矩阵** ，需要利用`amsmath`宏包
+- `\pmatrix`：带圆括号的矩阵
+- `\bmatrix`：带方括号的矩阵
+- `\vmatrix`：带竖线的矩阵
+- `\matrix`：不带括号的矩阵
+
+```latex
+\begin{pmatrix}
+a&b \\
+c&d
+\end{pmatrix}
+```
+
+对于 **分段函数** ，需要利用`amsmath`宏包提供的cases环境  
+在`\begin{cases}`和`\end{cases}`之间，使用`&`来分隔函数表达式和条件,`\text{ }`用于在数学环境中插入文本  
+
+```latex
+f(x) =
+\begin{cases}
+x^2+1 & \text{ if } x>0 \\
+0 & \text{ if } x = 0 \\
+x-1 & \text{ if } x<0
+\end{cases}
+```
+
+*注意：\text{ }插入的文本，注意空格保持间距*
 
 ---
 
